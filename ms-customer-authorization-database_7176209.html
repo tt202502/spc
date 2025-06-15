@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>专业剑 : ms-customer-authorization database</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">专业剑</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Base-Services_6389781.html">Base Services</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="ms-customer-authorization_6389763.html">ms-customer-authorization</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            专业剑 : ms-customer-authorization database
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> admin</span>, last modified on 三月 03, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><br/></p><div class="table-wrap"><table class="confluenceTable"><colgroup><col/><col/><col/></colgroup><tbody><tr><th class="confluenceTh">Table</th><th class="confluenceTh">Entity</th><th class="confluenceTh">Remark</th></tr><tr><td class="confluenceTd"><strong>AUTHZ_USER_PROFILE</strong></td><td class="confluenceTd"><strong>AuthorizerTokenEntity</strong></td><td class="confluenceTd"><div class="content-wrapper"><p>user level，用户信息表</p><p>store user token information from channel for SSO consume.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="250" src="attachments/7176209/7176219.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0301.jpeg?version=1&amp;modificationDate=1698938982000&amp;api=v2"></span></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="250" src="attachments/7176209/7176220.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0302.jpeg?version=1&amp;modificationDate=1698938997000&amp;api=v2"></span></p></div></td></tr><tr><td class="confluenceTd">TAC </td><td class="confluenceTd">TacEntity</td><td class="confluenceTd"><div class="content-wrapper"><p>交易<span>类型</span>配置表（交易类型和授权类型的配置表），Channel and <span>Transaction Type level</span></p><p>static configuration data to map transaction type with required authorization type.</p><p>包括<strong>chnl_cd</strong>，交易类型码<strong>txn_type_cd</strong>，交易限额，限额外授权类型，限额内授权类型，是否需要Challenge code，限额外signing mode，</p><p>限额内signing mode，是否激活SWK后的第一笔交易<strong>first_time_swk_txn_check</strong>。</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="250" src="attachments/7176209/7176226.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0303.jpeg?version=1&amp;modificationDate=1698940129000&amp;api=v2"></span></p></div></td></tr><tr><td class="confluenceTd">CUSTOMER_TAC</td><td class="confluenceTd"><br/></td><td class="confluenceTd"><div class="content-wrapper"><p>Customer level.</p><p>Resynced data from INB/BV/MB database describing preferred authorization by customers.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="250" src="attachments/7176209/7176218.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0300.jpeg?version=1&amp;modificationDate=1698938950000&amp;api=v2"></span></p></div></td></tr><tr><td colspan="1" class="confluenceTd">AUTHZ_TXN</td><td colspan="1" class="confluenceTd">AuthorizationTransactionEntity</td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>交易信息表，transaction level， including retry_count, mfa_type,</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="400" src="attachments/7176209/7176237.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0305.jpeg?version=2&amp;modificationDate=1699196297000&amp;api=v2"></span></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="400" src="attachments/7176209/7176236.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0306.jpeg?version=2&amp;modificationDate=1699196303000&amp;api=v2"></span></p></div></td></tr><tr><td colspan="1" class="confluenceTd">CUST_TOKEN_PREFERENCE</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="250" src="attachments/7176209/7176217.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0299.jpeg?version=1&amp;modificationDate=1698938925000&amp;api=v2"></span></p></div></td></tr><tr><td colspan="1" class="confluenceTd">USER_SMS_RECORD</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>store the number of SMS sent per day, used for SMS limit, user and channel level.</p><p>sms_cocunt</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="250" src="attachments/7176209/7176216.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0298.jpeg?version=1&amp;modificationDate=1698938909000&amp;api=v2"></span></p></div></td></tr><tr><td colspan="1" class="confluenceTd">User_limit</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>store customer counter.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="250" src="attachments/7176209/7176215.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0297.jpeg?version=1&amp;modificationDate=1698938894000&amp;api=v2"></span></p></div></td></tr><tr><td colspan="1" class="confluenceTd">AUTHZ_POLICY</td><td colspan="1" class="confluenceTd">AuthorizationPolicyEntit</td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>授权类型的配置表，Channel and Auth Type level</p><p>provide detailed information of all available authorization type.</p><p><span>包括</span><strong>chnl_cd</strong><span>，授权类型<strong>authz_type_cd，web_swk_first_time_sign_otp, mobile_<strong>swk_first_time_sign_otp</strong></strong></span></p><p><strong>max_resend_cnt</strong>: TXN level limit.</p><p><strong>custom.limits.max_resend_cnt:</strong> user level limit.</p><p><br/></p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="400" src="attachments/7176209/7176227.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0304.jpeg?version=1&amp;modificationDate=1698940148000&amp;api=v2"></span></p></div></td></tr><tr><td colspan="1" class="confluenceTd">txn_typ_template_mapping</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>provide detailed information of transaction type to template id mapping to derivate the notification.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="250" src="attachments/7176209/7176214.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0296.jpeg?version=1&amp;modificationDate=1698938875000&amp;api=v2"></span></p></div></td></tr><tr><td colspan="1" class="confluenceTd">txn_rule_mapping</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>static data for mapping Authorization rules to respective transaction type.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="250" src="attachments/7176209/7176213.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0295.jpeg?version=1&amp;modificationDate=1698938854000&amp;api=v2"></span></p></div></td></tr><tr><td colspan="1" class="confluenceTd">access_elevation</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p>用于2FA（access-elevation）的授权类型配置表，Channel和Function Code level。</p><p>static configuration data to map transaction code/function code with required authorization type.</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="250" src="attachments/7176209/7176211.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0293.jpeg?version=1&amp;modificationDate=1698938785000&amp;api=v2"></span></p></div></td></tr><tr><td colspan="1" class="confluenceTd">t_error_log</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><div class="content-wrapper"><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource" height="250" src="attachments/7176209/7176212.jpeg" data-image-src="http://confluence.txw.com:9090/download/attachments/7176209/IMG_0294.jpeg?version=1&amp;modificationDate=1698938826000&amp;api=v2"></span></p></div></td></tr></tbody></table></div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176211.jpeg">IMG_0293.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176212.jpeg">IMG_0294.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176213.jpeg">IMG_0295.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176214.jpeg">IMG_0296.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176215.jpeg">IMG_0297.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176216.jpeg">IMG_0298.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176217.jpeg">IMG_0299.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176218.jpeg">IMG_0300.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176219.jpeg">IMG_0301.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176220.jpeg">IMG_0302.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176226.jpeg">IMG_0303.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176227.jpeg">IMG_0304.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176240.jpeg">IMG_0306.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176239.jpeg">IMG_0305.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176237.jpeg">IMG_0305.jpeg</a> (image/jpeg)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/7176209/7176236.jpeg">IMG_0306.jpeg</a> (image/jpeg)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="comments" class="pageSectionTitle">Comments:</h2>
+                        </div>
+
+                        <table border="0" width="100%">
+                                                        <tr>
+                                <td >
+                                    <a name="comment-7176238"></a>
+                                    <font class="smallfont"><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" height="150" src="attachments/7176209/7176236.jpeg" data-image-src="attachments/7176209/7176236.jpeg" data-unresolved-comment-count="0" data-linked-resource-id="7176236" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="IMG_0306.jpeg" data-base-url="http://confluence.txw.com:9090" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="7176209" data-linked-resource-container-version="14"></span><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-thumbnail" height="150" src="attachments/7176209/7176237.jpeg" data-image-src="attachments/7176209/7176237.jpeg" data-unresolved-comment-count="0" data-linked-resource-id="7176237" data-linked-resource-version="2" data-linked-resource-type="attachment" data-linked-resource-default-alias="IMG_0305.jpeg" data-base-url="http://confluence.txw.com:9090" data-linked-resource-content-type="image/jpeg" data-linked-resource-container-id="7176209" data-linked-resource-container-version="14"></span></p></font>
+                                    <div align="left" class="smallfont" style="color: #666666; width: 98%; margin-bottom: 10px;">
+                                        <img src="images/icons/contenttypes/comment_16.png" height="16" width="16" border="0" align="absmiddle"/>
+                                        Posted by admin at 十一月 05, 2023 22:57
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </table>
+                    </div>
+                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on 六月 14, 2025 21:40</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

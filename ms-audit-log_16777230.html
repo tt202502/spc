@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>专业剑 : ms-audit-log</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">专业剑</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Base-Services_6389781.html">Base Services</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            专业剑 : ms-audit-log
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> admin</span>, last modified on 四月 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1749908443707 {padding: 0px;}
+div.rbtoc1749908443707 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1749908443707 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1749908443707'>
+<ul class='toc-indentation'>
+<li><a href='#ms-audit-log-服务描述'>服务描述</a></li>
+<li><a href='#ms-audit-log-主要API'>主要API</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-audit-log-GETadmin/audit-logs/transaction-group-id/{transaction-group-id}'>GET admin/audit-logs/transaction-group-id/{transaction-group-id}</a></li>
+<li><a href='#ms-audit-log-GETaudit-logs/{audit-log-id}'>GET audit-logs/{audit-log-id}</a></li>
+<li><a href='#ms-audit-log-GETaudit-logs/cfo/{audit-log-id}'>GET audit-logs/cfo/{audit-log-id}</a></li>
+<li><a href='#ms-audit-log-GETaudit-logs/templates/{functionGroupCode}/{type}'>GET audit-logs/templates/{functionGroupCode}/{type}</a></li>
+<li><a href='#ms-audit-log-GETaudit-logs/transaction-group-id/{transaction-group-id}'>GET audit-logs/transaction-group-id/{transaction-group-id}</a></li>
+<li><a href='#ms-audit-log-POSTaudit-logs/inquiry-unmapped'>POST audit-logs/inquiry-unmapped</a></li>
+<li><a href='#ms-audit-log-POSTaudit-logs/cfo/inquiry'>POST audit-logs/cfo/inquiry</a></li>
+<li><a href='#ms-audit-log-POSTcustomers/activity-logs/inquiry'>POST customers/activity-logs/inquiry</a></li>
+<li><a href='#ms-audit-log-POSTcustomers/audit-logs/inquiry'>POST customers/audit-logs/inquiry</a></li>
+<li><a href='#ms-audit-log-POSTcustomers/audit-logs/inquiry-unmapped'>POST customers/audit-logs/inquiry-unmapped</a></li>
+<li><a href='#ms-audit-log-POSTinternal/audit-logs/inquiry'>POST internal/audit-logs/inquiry</a></li>
+<li><a href='#ms-audit-log-GET/logout/activities校验短token的有效性'>GET /logout/activities 校验短token的有效性</a></li>
+</ul>
+</li>
+<li><a href='#ms-audit-log-主要业务流程'>主要业务流程</a></li>
+<li><a href='#ms-audit-log-主要架构设计方案'>主要架构设计方案</a></li>
+<li><a href='#ms-audit-log-主要数据库设计'>主要数据库设计</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-audit-log-token'>token</a></li>
+</ul>
+</li>
+<li><a href='#ms-audit-log-遇到的问题和解决方案'>遇到的问题和解决方案</a></li>
+<li><a href='#ms-audit-log-优缺点和改进方案分析，业界对比'>优缺点和改进方案分析，业界对比</a></li>
+</ul>
+</div></p><p><br/></p><h2 id="ms-audit-log-服务描述">服务描述</h2><p>负责记录audit日志的服务。</p><h2 id="ms-audit-log-主要API">主要API</h2><h3 id="ms-audit-log-GETadmin/audit-logs/transaction-group-id/{transaction-group-id}">GET admin/audit-logs/transaction-group-id/{transaction-group-id}</h3><p>通过transaction-group-id动态查询audit logs。需要校验权限。</p><h3 id="ms-audit-log-GETaudit-logs/{audit-log-id}">GET audit-logs/{audit-log-id}</h3><p>通过audit-log-id和channel（从jwt.aud获取）查询audit logs。</p><h3 id="ms-audit-log-GETaudit-logs/cfo/{audit-log-id}">GET audit-logs/cfo/{audit-log-id}</h3><p>通过audit-log-id查询audit logs。</p><h3 id="ms-audit-log-GETaudit-logs/templates/{functionGroupCode}/{type}">GET audit-logs/templates/{functionGroupCode}/{type}</h3><h3 id="ms-audit-log-GETaudit-logs/transaction-group-id/{transaction-group-id}">GET audit-logs/transaction-group-id/{transaction-group-id}</h3><h3 id="ms-audit-log-POSTaudit-logs/inquiry-unmapped">POST audit-logs/inquiry-unmapped</h3><h3 id="ms-audit-log-POSTaudit-logs/cfo/inquiry">POST audit-logs/cfo/inquiry</h3><h3 id="ms-audit-log-POSTcustomers/activity-logs/inquiry">POST customers/activity-logs/inquiry</h3><h3 id="ms-audit-log-POSTcustomers/audit-logs/inquiry">POST customers/audit-logs/inquiry</h3><p>通过userId动态查询audit logs，需要被search_mapping和result_mapping使用。</p><h3 id="ms-audit-log-POSTcustomers/audit-logs/inquiry-unmapped">POST customers/audit-logs/inquiry-unmapped</h3><h3 id="ms-audit-log-POSTinternal/audit-logs/inquiry">POST internal/audit-logs/inquiry</h3><h3 id="ms-audit-log-GET/logout/activities校验短token的有效性">GET /logout/activities 校验短token的有效性</h3><p>用户登出后，显示用户在登录期间的audit信息。通过user sessionId查询audit日志。</p><p><strong>流程</strong>：</p><p>domain ms → audit-log/logout/activity → audit-callback/inquiry → INB USP</p><p>audit-log根据两个配置，决定是否获取INB的数据还是获取本地数据库的数据。</p><p><br/></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 135.0px;"/><col style="width: 694.0px;"/></colgroup><tbody><tr><th class="confluenceTh">请求参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd">pageNo</td><td class="confluenceTd">default 0</td></tr><tr><td colspan="1" class="confluenceTd">pageSize</td><td colspan="1" class="confluenceTd">default 10</td></tr><tr><td colspan="1" class="confluenceTd">sortOrder</td><td colspan="1" class="confluenceTd">ASC or DESC</td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 141.0px;"/><col style="width: 687.0px;"/></colgroup><tbody><tr><th class="confluenceTh">响应参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd">status</td><td class="confluenceTd">SUCCESS or FAILED</td></tr><tr><td colspan="1" class="confluenceTd">data</td><td colspan="1" class="confluenceTd">List&lt;Object&gt;</td></tr><tr><td colspan="1" class="confluenceTd">data.id</td><td colspan="1" class="confluenceTd">audit log record id</td></tr><tr><td colspan="1" class="confluenceTd"><span>data.txnType</span></td><td colspan="1" class="confluenceTd">txn type or function code, BBO</td></tr><tr><td colspan="1" class="confluenceTd"><span>data.from</span></td><td colspan="1" class="confluenceTd">sourceRef, CFO</td></tr><tr><td colspan="1" class="confluenceTd"><span>data.to</span></td><td colspan="1" class="confluenceTd">destinationRef. DEST_REF</td></tr><tr><td colspan="1" class="confluenceTd"><span>data.amount</span></td><td colspan="1" class="confluenceTd">11.23</td></tr><tr><td colspan="1" class="confluenceTd"><span>data.refNumber</span></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd"><span>data.currencyCode</span></td><td colspan="1" class="confluenceTd">txn currency, USD</td></tr><tr><td colspan="1" class="confluenceTd"><span>data.logTime</span></td><td colspan="1" class="confluenceTd">txn activity time, 1684226077262</td></tr><tr><td colspan="1" class="confluenceTd">totalCount</td><td colspan="1" class="confluenceTd"><span>total count of matched record</span></td></tr><tr><td colspan="1" class="confluenceTd">pageNo</td><td colspan="1" class="confluenceTd">current page No</td></tr><tr><td colspan="1" class="confluenceTd">pageSize</td><td colspan="1" class="confluenceTd"><span>current page size</span></td></tr></tbody></table></div><p><br/></p><p><br/></p><h2 id="ms-audit-log-主要业务流程">主要业务流程</h2><p><br/></p><h2 id="ms-audit-log-主要架构设计方案">主要架构设计方案</h2><p><br/></p><h2 id="ms-audit-log-主要数据库设计">主要数据库设计</h2><h3 id="ms-audit-log-token">token</h3><p>token信息表，包括token取值，channel，group，用户ID，是否撤销，撤销原因。</p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 178.0px;"/><col style="width: 178.0px;"/><col style="width: 252.0px;"/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Remark</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd">id</td><td class="confluenceTd">id</td><td class="confluenceTd">UUID</td></tr><tr><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div><h2 id="ms-audit-log-遇到的问题和解决方案">遇到的问题和解决方案</h2><p><br/></p><h2 id="ms-audit-log-优缺点和改进方案分析，业界对比">优缺点和改进方案分析，业界对比</h2><p><br/></p><p><br/></p><p><br/></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16777230/16777231.png">C5B856E0-CEB6-466F-8A76-5BF898AA6C60.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16777230/16777232.png">image2023-10-1_22-46-23.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16777230/16777233.png">image2023-10-1_22-28-53.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16777230/16777234.png">image2023-10-1_22-18-23.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on 六月 14, 2025 21:40</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

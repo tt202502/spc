@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>专业剑 : ms-token-management</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">专业剑</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Base-Services_6389781.html">Base Services</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            专业剑 : ms-token-management
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> admin</span>, last modified on 四月 15, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1749908445709 {padding: 0px;}
+div.rbtoc1749908445709 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1749908445709 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1749908445709'>
+<ul class='toc-indentation'>
+<li><a href='#ms-token-management-服务描述'>服务描述</a></li>
+<li><a href='#ms-token-management-主要API'>主要API</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-token-management-API/[admin|internal]/tfa/tokens/register注册token'>API /[admin|internal]/tfa/tokens/register 注册token</a></li>
+<li><a href='#ms-token-management-API/[admin|internal]/tfa/tokens/update删除或更新token'>API /[admin|internal]/tfa/tokens/update 删除或更新token</a></li>
+<li><a href='#ms-token-management-API/internal/tfa/tokens/request请求token'>API /internal/tfa/tokens/request 请求token</a></li>
+<li><a href='#ms-token-management-API/internal/tfa/tokens/inquire查询token'>API /internal/tfa/tokens/inquire 查询token</a></li>
+<li><a href='#ms-token-management-API/internal/tfa/otp/request创建OTP'>API /internal/tfa/otp/request 创建OTP</a></li>
+<li><a href='#ms-token-management-API/internal/tfa/otp/verify校验SMS/HWK/SWKOTP'>API /internal/tfa/otp/verify 校验SMS/HWK/SWK OTP</a></li>
+<li><a href='#ms-token-management-API/v1/internal/tfa/users/retrieve查询TFA用户和token信息'>API /v1/internal/tfa/users/retrieve 查询TFA用户和token信息</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-token-management-TfaUserRetrieveGetPolicyProcessor'>TfaUserRetrieveGetPolicyProcessor</a></li>
+<li><a href='#ms-token-management-TfaUserRetrieveRetrieveCASTokenProcessor'>TfaUserRetrieveRetrieveCASTokenProcessor</a></li>
+<li><a href='#ms-token-management-TfaUserRetrieveRetrieveUserProcessor'>TfaUserRetrieveRetrieveUserProcessor</a></li>
+<li><a href='#ms-token-management-TfaUserRetrieveRetrieveSoftTokenProcessor'>TfaUserRetrieveRetrieveSoftTokenProcessor</a></li>
+<li><a href='#ms-token-management-TfaUserRetrieveComputeRemainCounterProcessor'>TfaUserRetrieveComputeRemainCounterProcessor</a></li>
+<li><a href='#ms-token-management-TfaUserRetrieveRetrieveTokenProcessor'>TfaUserRetrieveRetrieveTokenProcessor</a></li>
+</ul>
+</li>
+<li><a href='#ms-token-management-API/v1/internal/tfa/users/create创建tfa用户'>API /v1/internal/tfa/users/create 创建tfa用户</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-token-management-TfaUserCreateGetPolicyProcessor'>TfaUserCreateGetPolicyProcessor</a></li>
+<li><a href='#ms-token-management-TfaUserCreateChkAndCreateUserProcessor'>TfaUserCreateChkAndCreateUserProcessor</a></li>
+<li><a href='#ms-token-management-TfaUserCreateCreateCasUserProcessor'>TfaUserCreateCreateCasUserProcessor</a></li>
+</ul>
+</li>
+<li><a href='#ms-token-management-API/v1/admin/tfa/users/update更新tfa用户信息'>API /v1/admin/tfa/users/update 更新tfa用户信息</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-token-management-TfaUserGetPolicyProcessor'>TfaUserGetPolicyProcessor</a></li>
+<li><a href='#ms-token-management-TfaUserValidateRequestProcessor'>TfaUserValidateRequestProcessor</a></li>
+<li><a href='#ms-token-management-TfaUserChkAndDoActionProcessor'>TfaUserChkAndDoActionProcessor</a></li>
+</ul>
+</li>
+<li><a href='#ms-token-management-API/v1/internal/tfa/counter/update更新用户token重试次数'>API /v1/internal/tfa/counter/update 更新用户token重试次数</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-token-management-TfaCounterUpdateChkAndGetPolicyProcessor'>TfaCounterUpdateChkAndGetPolicyProcessor</a></li>
+<li><a href='#ms-token-management-TfaCounterUpdateValidateRequestProcessor'>TfaCounterUpdateValidateRequestProcessor</a></li>
+<li><a href='#ms-token-management-TfaCounterUpdateUpdateUserCounterProcessor'>TfaCounterUpdateUpdateUserCounterProcessor</a></li>
+<li><a href='#ms-token-management-TfaCounterUpdateUpdateTokenCounterProcessor'>TfaCounterUpdateUpdateTokenCounterProcessor</a></li>
+</ul>
+</li>
+<li><a href='#ms-token-management-APIPOST/internal/token-proxy/soft-tokens/deactivate'>API POST /internal/token-proxy/soft-tokens/deactivate</a></li>
+<li><a href='#ms-token-management-APIPOST/internal/token-proxy/hard-tokens/suspend'>API POST /internal/token-proxy/hard-tokens/suspend</a></li>
+<li><a href='#ms-token-management-APIPOST/v1/soft-tokens/otp/validate'>API POST /v1/soft-tokens/otp/validate</a></li>
+</ul>
+</li>
+<li><a href='#ms-token-management-BatchJOB'>Batch JOB</a></li>
+<li><a href='#ms-token-management-主要业务流程'>主要业务流程</a></li>
+<li><a href='#ms-token-management-主要架构设计方案'>主要架构设计方案</a></li>
+<li><a href='#ms-token-management-主要数据库设计'>主要数据库设计</a></li>
+<li><a href='#ms-token-management-遇到的问题和解决方案'>遇到的问题和解决方案</a></li>
+<li><a href='#ms-token-management-优缺点和改进方案分析，业界对比'>优缺点和改进方案分析，业界对比</a></li>
+</ul>
+</div></p><h2 id="ms-token-management-服务描述">服务描述</h2><p>该服务主要负责授权token的管理，token类型包括SMS OTP，SWK， HWK，FIDO，常用操作包括token的查询，创建等。</p><p>ms-base-token-management-corp 负责CORP的token管理的服务。</p><p>ms-token-management-command 负责与token管理相关的业务的domain服务。</p><h2 id="ms-token-management-主要API">主要API</h2><h3 id="ms-token-management-API/[admin|internal]/tfa/tokens/register注册token">API /[admin|internal]/tfa/tokens/register 注册token</h3><p>admin：用于backoffice</p><p>internal：用于用户注册SMS/HWK token。</p><h3 id="ms-token-management-API/[admin|internal]/tfa/tokens/update删除或更新token">API /[admin|internal]/tfa/tokens/update 删除或更新token</h3><p>dmin：用于backoffice删除SMS/HWK token。</p><p>internal：用于用户删除或者更新SMS token。</p><h3 id="ms-token-management-API/internal/tfa/tokens/request请求token">API /internal/tfa/tokens/request 请求token</h3><p><br/></p><p>步骤：</p><p>1. 校验destinationInfo，tokenNo。</p><p>2. 根据domain，查询tokenPolicy，通过本地缓存或DB TfaPolicy。获得authzAllowedList、CASEnable、TokenModel。</p><p>3. 根据userId和domain，查询TfaUser表，获取用户信息。</p><p>4. HWK，调用CAS获取用户和token信息。</p><p>如果用户不存在，则创建CAS用户。</p><p>如果用户存在且状态是revoke，则硬删除用户，重新创建用户记录。</p><p>如果用户存在且状态是block或lock，抛出异常。</p><p>如果用户存在且状态是active，do nothing。</p><p><br/></p><p>保存到t_tfa_token表。</p><p><br/></p><h3 id="ms-token-management-API/internal/tfa/tokens/inquire查询token">API /internal/tfa/tokens/inquire 查询token</h3><p>根据tokenno和userId查询token。</p><p>步骤：</p><p>1. 校验userId，tokenNo。</p><p>2. 根据domain，查询tokenPolicy，通过本地缓存或DB TfaPolicy。</p><p>3. 根据tokenType，查询用户和token信息。</p><p>HWK，查CAS。如果用户状态是block，更新本地数据库。</p><p>SWK，查SoftTokenUser表。</p><p>4. 查询user和token level的当前计数。</p><p>5. 查询TfaToken表，返回token信息。</p><p>6. 查询TfaUser表，返回用户信息。根据之前获取的用户信息，更新TfaUser表。</p><h3 id="ms-token-management-API/internal/tfa/otp/request创建OTP">API /internal/tfa/otp/request 创建OTP</h3><p>创建OTP。</p><h3 id="ms-token-management-API/internal/tfa/otp/verify校验SMS/HWK/SWKOTP">API /internal/tfa/otp/verify 校验SMS/HWK/SWK OTP</h3><p>SWK OTP: cust-auth → token-mgn/otp/verify → ms-crypto/verify-otp → New HSM</p><p>ms-crypto从请求体获取Token seed，用HSM解密后用token seed生成OTP，和请求体的OTP校验。</p><h3 id="ms-token-management-API/v1/internal/tfa/users/retrieve查询TFA用户和token信息">API /v1/internal/tfa/users/retrieve 查询TFA用户和token信息</h3><p><br/></p><p><span class="confluence-embedded-file-wrapper"><img class="confluence-embedded-image confluence-external-resource" src="attachments/6389783/6389808.png" data-image-src="http://confluence.txw.com:9090/download/attachments/6389783/image2023-9-27_23-54-22.png?version=1&amp;modificationDate=1695830063000&amp;api=v2"></span></p><p>在<strong>retrieve</strong>()方法中调用了<strong>start</strong>(tfaUserRetrieveProperties.getDefaultChain(), context)方法。</p><p><strong>TfaUserRetrieveProperties</strong>是接口/users/retrieve对应的配置文件，其中<strong>getDefaultChain</strong>()定义了默认的责任链的每个<strong>ChainedProcessor</strong>具体实现类。</p><p><strong>start</strong>()方法定义了责任链的处理：依次调用每个<strong>ChainedProcessor</strong>具体实现类的<strong>chain</strong>()方法。直到全部处理完成，或者发生<strong>ChainBreak</strong>异常。</p><h4 id="ms-token-management-TfaUserRetrieveGetPolicyProcessor">TfaUserRetrieveGetPolicyProcessor</h4><p>查询缓存和<strong>t_tfa_policy</strong>表。</p><p>根据配置文件设置channel。</p><h4 id="ms-token-management-TfaUserRetrieveRetrieveCASTokenProcessor">TfaUserRetrieveRetrieveCASTokenProcessor</h4><p>调用CAS的/api/users接口。</p><p>如果返回casUser和token都存在，调用CAS的/api/devices接口查询详细信息。</p><h4 id="ms-token-management-TfaUserRetrieveRetrieveUserProcessor">TfaUserRetrieveRetrieveUserProcessor</h4><p>查询<strong>t_tfa_user</strong>表。如果tfaUser不存在而且casUser存在，则创建tfaUser。</p><h4 id="ms-token-management-TfaUserRetrieveRetrieveSoftTokenProcessor">TfaUserRetrieveRetrieveSoftTokenProcessor</h4><p>查询<strong>soft_token_usr</strong>表，通过userId，channel，tsn，返回user的activated soft token信息，包括device info，otp token，pki token。</p><h4 id="ms-token-management-TfaUserRetrieveComputeRemainCounterProcessor">TfaUserRetrieveComputeRemainCounterProcessor</h4><p>通过tfa policy，返回最大重试次数。</p><h4 id="ms-token-management-TfaUserRetrieveRetrieveTokenProcessor">TfaUserRetrieveRetrieveTokenProcessor</h4><p>查询<strong>t_tfa_token</strong>表，通过userId，channel，返回token list。并同步。</p><h3 id="ms-token-management-API/v1/internal/tfa/users/create创建tfa用户">API /v1/internal/tfa/users/create 创建tfa用户</h3><p>创建用户并存储在本地DB，调用CAS创建用户。</p><h4 id="ms-token-management-TfaUserCreateGetPolicyProcessor">TfaUserCreateGetPolicyProcessor</h4><p>查询缓存和t_tfa_policy表，通过channel，policy code。设置CAS enable。</p><h4 id="ms-token-management-TfaUserCreateChkAndCreateUserProcessor">TfaUserCreateChkAndCreateUserProcessor</h4><p>查询t_tfa_user表。如果user不存在，则新增表记录。</p><h4 id="ms-token-management-TfaUserCreateCreateCasUserProcessor">TfaUserCreateCreateCasUserProcessor</h4><p>调用CAS的/api/users接口。如果用户存在则调用CAS接口删除用户。调用CAS接口创建用户。</p><h3 id="ms-token-management-API/v1/admin/tfa/users/update更新tfa用户信息">API /v1/admin/tfa/users/update 更新tfa用户信息</h3><p>更新用户在本地DB中的信息，调用CAS更新用户信息。</p><h4 id="ms-token-management-TfaUserGetPolicyProcessor">TfaUserGetPolicyProcessor</h4><p>查询缓存和t_tfa_policy表，通过channel id 和policy id。</p><h4 id="ms-token-management-TfaUserValidateRequestProcessor">TfaUserValidateRequestProcessor</h4><p>查询t_tfa_user表，通过user ID和domain。校验用户状态</p><h4 id="ms-token-management-TfaUserChkAndDoActionProcessor">TfaUserChkAndDoActionProcessor</h4><p>根据请求参数，更新t_tfa_user表。</p><h3 id="ms-token-management-API/v1/internal/tfa/counter/update更新用户token重试次数">API /v1/internal/tfa/counter/update 更新用户token重试次数</h3><h4 id="ms-token-management-TfaCounterUpdateChkAndGetPolicyProcessor">TfaCounterUpdateChkAndGetPolicyProcessor</h4><p>查询缓存和t_tfa_policy表，通过channel，返回count level和最大次数。</p><h4 id="ms-token-management-TfaCounterUpdateValidateRequestProcessor">TfaCounterUpdateValidateRequestProcessor</h4><p>校验request，包括token type。</p><p>查询t_tfa_user表。</p><h4 id="ms-token-management-TfaCounterUpdateUpdateUserCounterProcessor">TfaCounterUpdateUpdateUserCounterProcessor</h4><p>更新t_tfa_user表counter最新次数。</p><h4 id="ms-token-management-TfaCounterUpdateUpdateTokenCounterProcessor">TfaCounterUpdateUpdateTokenCounterProcessor</h4><p>更新t_tfa_token表。</p><h3 id="ms-token-management-APIPOST/internal/token-proxy/soft-tokens/deactivate">API POST /internal/token-proxy/soft-tokens/deactivate</h3><p>用于Kill Switch。</p><h3 id="ms-token-management-APIPOST/internal/token-proxy/hard-tokens/suspend">API POST /internal/token-proxy/hard-tokens/suspend</h3><p>用于Kill Switch。</p><h3 id="ms-token-management-APIPOST/v1/soft-tokens/otp/validate">API POST /v1/soft-tokens/otp/validate</h3><p>校验soft token。</p><p>传参tokenSerialNum、tokenAppId、dfpHash、otp、challenge、challenge2。</p><p><strong>步骤</strong>：</p><p>同tfa/otp/verify，复用TokenValidationService.validatetOtp()。</p><p>SWK OTP: cust-auth → token-mgn/otp/verify → ms-crypto/verify-otp → New HSM</p><p>ms-crypto从请求体获取Token seed，用HSM解密后用token seed生成OTP，和请求体的OTP校验。</p><h2 id="ms-token-management-BatchJOB">Batch JOB</h2><p>每天下午执行，查询最近2天的tfa-softtoken数据，去重后给用户发消息。</p><h2 id="ms-token-management-主要业务流程">主要业务流程</h2><h2 id="ms-token-management-主要架构设计方案">主要架构设计方案</h2><h2 id="ms-token-management-主要数据库设计">主要数据库设计</h2><h2 id="ms-token-management-遇到的问题和解决方案">遇到的问题和解决方案</h2><h2 id="ms-token-management-优缺点和改进方案分析，业界对比">优缺点和改进方案分析，业界对比</h2><p><br/></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/6389783/6389808.png">image2023-9-27_23-54-22.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/6389783/6389810.pdf">ms-token-management.pdf</a> (application/pdf)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on 六月 14, 2025 21:40</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

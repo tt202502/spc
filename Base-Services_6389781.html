@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>专业剑 : Base Services</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">专业剑</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            专业剑 : Base Services
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> admin</span>, last modified on 二月 22, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1749908443308 {padding: 0px;}
+div.rbtoc1749908443308 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1749908443308 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1749908443308'>
+<ul class='toc-indentation'>
+<li><a href='#BaseServices-1FA登录领域'>1FA 登录领域</a>
+<ul class='toc-indentation'>
+<li><a href='#BaseServices-ms-customer-security'>ms-customer-security</a></li>
+</ul>
+</li>
+<li><a href='#BaseServices-2FA授权领域'>2FA 授权领域</a>
+<ul class='toc-indentation'>
+<li><a href='#BaseServices-ms-customer-authorization'>ms-customer-authorization</a></li>
+<li><a href='#BaseServices-ms-token-management'>ms-token-management</a></li>
+<li><a href='#BaseServices-ms-base-token-management-corp'>ms-base-token-management-corp</a></li>
+<li><a href='#BaseServices-ms-3ds-authorization'>ms-3ds-authorization</a></li>
+</ul>
+</li>
+<li><a href='#BaseServices-Protect领域'>Protect 领域</a>
+<ul class='toc-indentation'>
+<li><a href='#BaseServices-ms-crypto'>ms-crypto</a></li>
+<li><a href='#BaseServices-ms-partner-security'>ms-partner-security</a></li>
+<li><a href='#BaseServices-ms-fraud-management'>ms-fraud-management</a></li>
+<li><a href='#BaseServices-ms-digital-signing'>ms-digital-signing</a></li>
+</ul>
+</li>
+<li><a href='#BaseServices-消息服务领域'>消息服务领域</a>
+<ul class='toc-indentation'>
+<li><a href='#BaseServices-ms-customer-notification'>ms-customer-notification</a></li>
+<li><a href='#BaseServices-ms-notification-inbox'>ms-notification-inbox</a></li>
+<li><a href='#BaseServices-ms-alerts-subscription'>ms-alerts-subscription</a></li>
+<li><a href='#BaseServices-ms-secure-mailbox'>ms-secure-mailbox</a></li>
+</ul>
+</li>
+<li><a href='#BaseServices-交易和审计日志领域'>交易和审计日志领域</a>
+<ul class='toc-indentation'>
+<li><a href='#BaseServices-ms-online-transaction'>ms-online-transaction</a></li>
+<li><a href='#BaseServices-ms-auditlog'>ms-auditlog</a></li>
+<li><a href='#BaseServices-ms-audit-callback'>ms-audit-callback</a></li>
+</ul>
+</li>
+<li><a href='#BaseServices-API网关服务领域'>API网关服务领域</a>
+<ul class='toc-indentation'>
+<li><a href='#BaseServices-infra-web'>infra-web</a></li>
+<li><a href='#BaseServices-ms-gateway&amp;gateway-config'>ms-gateway &amp; gateway-config</a></li>
+<li><a href='#BaseServices-ms-authorization'>ms-authorization</a></li>
+</ul>
+</li>
+<li><a href='#BaseServices-用户信息服务领域'>用户信息服务领域</a>
+<ul class='toc-indentation'>
+<li><a href='#BaseServices-ms-customer-profile'>ms-customer-profile</a></li>
+</ul>
+</li>
+<li><a href='#BaseServices-ms-base-reference-data静态数据中心'>ms-base-reference-data 静态数据中心</a></li>
+<li><a href='#BaseServices-其他'>其他</a>
+<ul class='toc-indentation'>
+<li><a href='#BaseServices-ms-calendar-command公司日期管理服务'>ms-calendar-command 公司日期管理服务</a></li>
+<li><a href='#BaseServices-ms-system-parameter系统参数服务'>ms-system-parameter 系统参数服务</a></li>
+</ul>
+</li>
+</ul>
+</div></p><h3 id="BaseServices-1FA登录领域">1FA 登录领域</h3><h4 id="BaseServices-ms-customer-security">ms-customer-security</h4><p>负责用户登录的服务，登录方式包括用户名/密码，指纹识别，SingPass等。</p><p>还有miniLogin，YouthAccount。</p><h3 id="BaseServices-2FA授权领域">2FA 授权领域</h3><h4 id="BaseServices-ms-customer-authorization">ms-customer-authorization</h4><p>负责用户的授权管理服务。</p><p>Region包括SG，MY，HK，CN等。</p><p>Channel包括INB，BV，MBSS等。</p><p>AuthType包括SMS，Email，SWK，HWK，FIDO。</p><p>操作类型包括TAC，2FA。</p><p><br/></p><h4 id="BaseServices-ms-token-management">ms-token-management</h4><p>用户的token管理，token类型包括SMS OTP，Email OTP，SWK，HWK。</p><h4 id="BaseServices-ms-base-token-management-corp">ms-base-token-management-corp</h4><p><br/></p><h4 id="BaseServices-ms-3ds-authorization">ms-3ds-authorization</h4><p>专门为3ds拆分出的授权服务。特点是请求和响应都需要加密解密。</p><h3 id="BaseServices-Protect领域">Protect 领域</h3><h4 id="BaseServices-ms-crypto">ms-crypto</h4><p>负责加解密。</p><h4 id="BaseServices-ms-partner-security">ms-partner-security</h4><p>负责第三方登录服务。</p><h4 id="BaseServices-ms-fraud-management">ms-fraud-management</h4><p>负责用户的黑名单管理。</p><h4 id="BaseServices-ms-digital-signing">ms-digital-signing</h4><p>负责数字签名。</p><p><br/></p><h3 id="BaseServices-消息服务领域">消息服务领域</h3><h4 id="BaseServices-ms-customer-notification">ms-customer-notification</h4><h4 id="BaseServices-ms-notification-inbox">ms-notification-inbox</h4><h4 id="BaseServices-ms-alerts-subscription">ms-alerts-subscription</h4><h4 id="BaseServices-ms-secure-mailbox">ms-secure-mailbox</h4><p><br/></p><h3 id="BaseServices-交易和审计日志领域">交易和审计日志领域</h3><h4 id="BaseServices-ms-online-transaction">ms-online-transaction</h4><h4 id="BaseServices-ms-auditlog">ms-auditlog</h4><h4 id="BaseServices-ms-audit-callback">ms-audit-callback</h4><h3 id="BaseServices-API网关服务领域">API网关服务领域</h3><h4 id="BaseServices-infra-web">infra-web</h4><h4 id="BaseServices-ms-gateway&amp;gateway-config">ms-gateway &amp; gateway-config</h4><h4 id="BaseServices-ms-authorization">ms-authorization</h4><p><br/></p><h3 id="BaseServices-用户信息服务领域">用户信息服务领域</h3><h4 id="BaseServices-ms-customer-profile">ms-customer-profile</h4><h3 id="BaseServices-ms-base-reference-data静态数据中心">ms-base-reference-data 静态数据中心</h3><p>比如country，swift code等。</p><h3 id="BaseServices-其他">其他</h3><h4 id="BaseServices-ms-calendar-command公司日期管理服务">ms-calendar-command 公司日期管理服务</h4><h4 id="BaseServices-ms-system-parameter系统参数服务">ms-system-parameter 系统参数服务</h4><p><br/></p><p><br/></p><p><ul class='childpages-macro'><li><a href="base-service-template_16220233.html">base service template</a></li><li><a href="ms-3ds-authorization_17793026.html">ms-3ds-authorization</a></li><li><a href="ms-audit-callback_16777257.html">ms-audit-callback</a></li><li><a href="ms-audit-log_16777230.html">ms-audit-log</a></li><li><a href="ms-authorization_6389832.html">ms-authorization</a></li><li><a href="ms-crypto_16220248.html">ms-crypto</a></li><li><a href="ms-customer-authorization_6389763.html">ms-customer-authorization</a></li><li><a href="ms-customer-profile_16220219.html">ms-customer-profile</a></li><li><a href="ms-customer-security_6750224.html">ms-customer-security</a></li><li><a href="ms-digital-signing_16220263.html">ms-digital-signing</a></li><li><a href="ms-fraud-management_16220239.html">ms-fraud-management</a></li><li><a href="ms-partner-security_16777245.html">ms-partner-security</a></li><li><a href="ms-token-management_6389783.html">ms-token-management</a></li></ul></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on 六月 14, 2025 21:40</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

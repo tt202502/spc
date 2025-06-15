@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>专业剑 : ms-3ds-authorization</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">专业剑</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Base-Services_6389781.html">Base Services</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            专业剑 : ms-3ds-authorization
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> admin</span>, last modified on 五月 21, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1749908443535 {padding: 0px;}
+div.rbtoc1749908443535 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1749908443535 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1749908443535'>
+<ul class='toc-indentation'>
+<li><a href='#ms-3ds-authorization-服务描述'>服务描述</a></li>
+<li><a href='#ms-3ds-authorization-主要API'>主要API</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-3ds-authorization-POST/cards/authorizations/3ds/stepup'>POST /cards/authorizations/3ds/stepup</a></li>
+<li><a href='#ms-3ds-authorization-POST/cards/authorizations/3ds/initiateAction'>POST /cards/authorizations/3ds/initiateAction</a></li>
+<li><a href='#ms-3ds-authorization-POST/cards/authorizations/3ds/validate'>POST /cards/authorizations/3ds/validate</a></li>
+<li><a href='#ms-3ds-authorization-POST/3ds/tac/validate'>POST /3ds/tac/validate</a></li>
+<li><a href='#ms-3ds-authorization-POST/3ds/tac/otp'>POST /3ds/tac/otp</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-3ds-authorization-流程'>流程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href='#ms-3ds-authorization-主要业务流程'>主要业务流程</a></li>
+<li><a href='#ms-3ds-authorization-主要架构设计方案'>主要架构设计方案</a></li>
+<li><a href='#ms-3ds-authorization-主要数据库设计'>主要数据库设计</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-3ds-authorization-token'>token</a></li>
+</ul>
+</li>
+<li><a href='#ms-3ds-authorization-遇到的问题和解决方案'>遇到的问题和解决方案</a></li>
+<li><a href='#ms-3ds-authorization-优缺点和改进方案分析，业界对比'>优缺点和改进方案分析，业界对比</a></li>
+</ul>
+</div></p><p><br/></p><h2 id="ms-3ds-authorization-服务描述">服务描述</h2><p>从ms-customer-authorization剥离出的3DS的服务，支持VISA和Mater业务。</p><p>对于SG和MY的卡交易的鉴权业务，用VCAS代替了原来的Infinitium，支持VISA卡和master卡。</p><h2 id="ms-3ds-authorization-主要API">主要API</h2><h3 id="ms-3ds-authorization-POST/cards/authorizations/3ds/stepup">POST /cards/authorizations/3ds/stepup</h3><p>SG&amp;MY</p><p>VCAS → WSO2 → internal SCG → ms-3ds-authorization</p><p>用于获取并返回用户的可用token类型，SWK优先于SMS。相当于ms-customer-authorization的token/preference。</p><p><br/></p><p>1. 校验PAN，Primary Account Number/Credit Card Number。</p><p>2. 检查card holder是否可以通过OTP和OOB鉴权。</p><p>3. 决定鉴权类型（SWK/SMS_OTP）。</p><p><br/></p><h3 id="ms-3ds-authorization-POST/cards/authorizations/3ds/initiateAction">POST /cards/authorizations/3ds/initiateAction</h3><p>SG&amp;MY</p><p>用于发送SWK或SMS OTP。相当于tac/request。</p><p>如果是OTP，创建OTP，通过ms-customer-notification发送SMS。</p><p>如果是OOB，发送消息到card holder的OCBC APP。</p><h3 id="ms-3ds-authorization-POST/cards/authorizations/3ds/validate">POST /cards/authorizations/3ds/validate</h3><p>SG&amp;MY INB</p><p>用于校验SMS OTP，轮询校验soft token的状态。相当于tac/validate和authorization-status/retrieve。</p><p><br/></p><p>必须同OCBC的手机银行应用集成，判断card holder是否鉴权成功并返回结果，并通过API的响应返回给VCAS。</p><p>浏览器应用轮询该API。</p><h3 id="ms-3ds-authorization-POST/3ds/tac/validate">POST /3ds/tac/validate</h3><p>SG&amp;MY</p><p>Mobile APP → DMZ SCG → ms-3ds-authorization</p><p>用于校验token</p><p>OOB鉴权流程中，通过应用内进行验证。</p><h3 id="ms-3ds-authorization-POST/3ds/tac/otp">POST /3ds/tac/otp</h3><p>SG&amp;MY</p><p>Mobile APP → DMZ SCG → ms-3ds-authorization</p><p>用于发送Stepup SMS。</p><p><br/></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 135.0px;"/><col style="width: 694.0px;"/></colgroup><tbody><tr><th class="confluenceTh">请求参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 141.0px;"/><col style="width: 687.0px;"/></colgroup><tbody><tr><th class="confluenceTh">响应参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><h4 id="ms-3ds-authorization-流程">流程</h4><p><br/></p><p><br/></p><h2 id="ms-3ds-authorization-主要业务流程">主要业务流程</h2><p><br/></p><h2 id="ms-3ds-authorization-主要架构设计方案">主要架构设计方案</h2><p><br/></p><h2 id="ms-3ds-authorization-主要数据库设计">主要数据库设计</h2><h3 id="ms-3ds-authorization-token">token</h3><p>token信息表，包括token取值，channel，group，用户ID，是否撤销，撤销原因。</p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 178.0px;"/><col style="width: 178.0px;"/><col style="width: 252.0px;"/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Remark</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd">id</td><td class="confluenceTd">id</td><td class="confluenceTd">UUID</td></tr><tr><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div><h2 id="ms-3ds-authorization-遇到的问题和解决方案">遇到的问题和解决方案</h2><p><br/></p><h2 id="ms-3ds-authorization-优缺点和改进方案分析，业界对比">优缺点和改进方案分析，业界对比</h2><p><br/></p><p><br/></p><p><br/></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/17793026/17793027.png">C5B856E0-CEB6-466F-8A76-5BF898AA6C60.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/17793026/17793028.png">image2023-10-1_22-46-23.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/17793026/17793029.png">image2023-10-1_22-28-53.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/17793026/17793030.png">image2023-10-1_22-18-23.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on 六月 14, 2025 21:40</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

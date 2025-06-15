@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>专业剑 : ms-partner-security</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">专业剑</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Base-Services_6389781.html">Base Services</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            专业剑 : ms-partner-security
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> admin</span>, last modified on 四月 16, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1749908445661 {padding: 0px;}
+div.rbtoc1749908445661 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1749908445661 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1749908445661'>
+<ul class='toc-indentation'>
+<li><a href='#ms-partner-security-服务描述'>服务描述</a></li>
+<li><a href='#ms-partner-security-主要API'>主要API</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-partner-security-GET/sg-verify/callback'>GET /sg-verify/callback</a></li>
+<li><a href='#ms-partner-security-GET/stack/retrieve'>GET /stack/retrieve</a></li>
+<li><a href='#ms-partner-security-POST/sg-verify/session'>POST /sg-verify/session</a></li>
+<li><a href='#ms-partner-security-POST/lifestyle/merchant/retrieve'>POST /lifestyle/merchant/retrieve</a></li>
+<li><a href='#ms-partner-security-POST/sso/outbound/token'>POST /sso/outbound/token</a></li>
+<li><a href='#ms-partner-security-POST/stack/register'>POST /stack/register</a></li>
+</ul>
+</li>
+<li><a href='#ms-partner-security-MyInfo'>MyInfo</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-partner-security-POST/session'>POST /session</a></li>
+<li><a href='#ms-partner-security-POST/my-info/person/retrieve'>POST /my-info/person/retrieve</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-partner-security-流程'>流程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href='#ms-partner-security-主要业务流程'>主要业务流程</a></li>
+<li><a href='#ms-partner-security-主要架构设计方案'>主要架构设计方案</a></li>
+<li><a href='#ms-partner-security-主要数据库设计'>主要数据库设计</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-partner-security-token'>token</a></li>
+</ul>
+</li>
+<li><a href='#ms-partner-security-遇到的问题和解决方案'>遇到的问题和解决方案</a></li>
+<li><a href='#ms-partner-security-优缺点和改进方案分析，业界对比'>优缺点和改进方案分析，业界对比</a></li>
+</ul>
+</div></p><p><br/></p><h2 id="ms-partner-security-服务描述">服务描述</h2><p>第三方登录的鉴权服务。</p><p>从第三方检索数据 → 通过OAuth授权流程</p><p>1. MyInfo或SingPass 验证</p><p>2. 商户门户的STACK集成（在第三方订阅准备好之前实施的旧流程）</p><h2 id="ms-partner-security-主要API">主要API</h2><h3 id="ms-partner-security-GET/sg-verify/callback">GET /sg-verify/callback</h3><h3 id="ms-partner-security-GET/stack/retrieve">GET /stack/retrieve</h3><h3 id="ms-partner-security-POST/sg-verify/session">POST /sg-verify/session</h3><h3 id="ms-partner-security-POST/lifestyle/merchant/retrieve">POST /lifestyle/merchant/retrieve</h3><h3 id="ms-partner-security-POST/sso/outbound/token">POST /sso/outbound/token</h3><h3 id="ms-partner-security-POST/stack/register">POST /stack/register</h3><h2 id="ms-partner-security-MyInfo">MyInfo</h2><p>调用singpass提供的接口/userinfo，返回用户信息。</p><h3 id="ms-partner-security-POST/session">POST /session</h3><p><br/></p><div class="table-wrap"><table class="relative-table confluenceTable" style="width: 57.5017%;"><colgroup><col style="width: 16.4034%;"/><col style="width: 83.6057%;"/></colgroup><tbody><tr><th class="confluenceTh">响应参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd">pkce challenge</td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd">method</td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd">nonce</td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd">state</td><td class="confluenceTd"><br/></td></tr></tbody></table></div><p><br/></p><h3 id="ms-partner-security-POST/my-info/person/retrieve">POST /my-info/person/retrieve</h3><p>return person data + opaque tokens。</p><p><br/></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 135.0px;"/><col style="width: 694.0px;"/></colgroup><tbody><tr><th class="confluenceTh">请求参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd">authCode</td><td class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">state</td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 141.0px;"/><col style="width: 687.0px;"/></colgroup><tbody><tr><th class="confluenceTh">响应参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd">person data</td><td class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">opaque tokens</td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div><h4 id="ms-partner-security-流程">流程</h4><p><br/></p><p><br/></p><h2 id="ms-partner-security-主要业务流程">主要业务流程</h2><p><br/></p><h2 id="ms-partner-security-主要架构设计方案">主要架构设计方案</h2><p><br/></p><h2 id="ms-partner-security-主要数据库设计">主要数据库设计</h2><h3 id="ms-partner-security-token">token</h3><p>token信息表，包括token取值，channel，group，用户ID，是否撤销，撤销原因。</p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 178.0px;"/><col style="width: 178.0px;"/><col style="width: 252.0px;"/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Remark</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd">id</td><td class="confluenceTd">id</td><td class="confluenceTd">UUID</td></tr><tr><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div><h2 id="ms-partner-security-遇到的问题和解决方案">遇到的问题和解决方案</h2><p><br/></p><h2 id="ms-partner-security-优缺点和改进方案分析，业界对比">优缺点和改进方案分析，业界对比</h2><p><br/></p><p><br/></p><p><br/></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16777245/16777246.png">C5B856E0-CEB6-466F-8A76-5BF898AA6C60.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16777245/16777247.png">image2023-10-1_22-46-23.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16777245/16777248.png">image2023-10-1_22-28-53.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16777245/16777249.png">image2023-10-1_22-18-23.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on 六月 14, 2025 21:40</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

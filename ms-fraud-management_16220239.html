@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>专业剑 : ms-fraud-management</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">专业剑</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Base-Services_6389781.html">Base Services</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            专业剑 : ms-fraud-management
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> admin</span>, last modified on 三月 19, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1749908445583 {padding: 0px;}
+div.rbtoc1749908445583 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1749908445583 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1749908445583'>
+<ul class='toc-indentation'>
+<li><a href='#ms-fraud-management-服务描述'>服务描述</a></li>
+<li><a href='#ms-fraud-management-主要API'>主要API</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-fraud-management-/settings'>/settings</a></li>
+<li><a href='#ms-fraud-management-/risk-score/retrieve'>/risk-score/retrieve</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-fraud-management-流程'>流程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href='#ms-fraud-management-主要业务流程'>主要业务流程</a></li>
+<li><a href='#ms-fraud-management-数据依赖和同步'>数据依赖和同步</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-fraud-management-Dependency'>Dependency</a></li>
+</ul>
+</li>
+<li><a href='#ms-fraud-management-主要架构设计方案'>主要架构设计方案</a></li>
+<li><a href='#ms-fraud-management-主要数据库设计'>主要数据库设计</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-fraud-management-token'>token</a></li>
+</ul>
+</li>
+<li><a href='#ms-fraud-management-遇到的问题和解决方案'>遇到的问题和解决方案</a></li>
+<li><a href='#ms-fraud-management-优缺点和改进方案分析，业界对比'>优缺点和改进方案分析，业界对比</a></li>
+</ul>
+</div></p><p><br/></p><h2 id="ms-fraud-management-服务描述">服务描述</h2><p>负责反欺诈管理的服务，包括验证用户的IP，设备信息，loginlD信息，国家地区，APP。</p><p><span style="color: rgb(0,0,0);">ms-fraud-surveillance 欺诈监控服务。</span></p><p><span style="color: rgb(0,0,0);">AFMS Anti Fraud M Service</span></p><h2 id="ms-fraud-management-主要API">主要API</h2><h3 id="ms-fraud-management-/settings"><strong>/settings</strong></h3><h3 id="ms-fraud-management-/risk-score/retrieve">/risk-score/retrieve</h3><p><br/></p><p>根据请求参数的短token和token type hint，校验该短token是否有效。</p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 135.0px;"/><col style="width: 694.0px;"/></colgroup><tbody><tr><th class="confluenceTh">请求参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 141.0px;"/><col style="width: 687.0px;"/></colgroup><tbody><tr><th class="confluenceTh">响应参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><h4 id="ms-fraud-management-流程">流程</h4><p><br/></p><p><br/></p><h2 id="ms-fraud-management-主要业务流程">主要业务流程</h2><p>1) <strong>MFE(web/mb) -&gt; fraud-mgn/settings</strong>, pass <strong>functionCode</strong>, return <strong>isEnable</strong> (true or false) and <strong>orgID</strong>.</p><p>某些场景下，该步骤可能忽略，因为functionCode和orqID属于固定配置。</p><p>2) if isEnable=true, <strong>MFE(web/mb)</strong> pass <strong>deviceld</strong>, generated <strong>afms_session_ID</strong> and <strong>orglD</strong> -&gt; <strong>AFMS</strong>, request header with <strong>origin IP</strong>, AFMS store deviceld, afms_session_ID and orglD.</p><p>该步骤不能忽略，因为AFMS需要登记<strong>afms_session_ID</strong>等，afms_session_ID属于transaction level.</p><p>MFE通过JS，mobile通过SDK创建<strong>afms_session_ID。</strong></p><p>3) <strong>MFE(web/mb)</strong> -&gt; <strong>ms-fund-transfer</strong> with afms_session_ID -&gt;<strong> ms-fraud-management/risk-score/retrieve</strong> with <strong>afms_session_ID</strong>, <strong>origin IP</strong> -&gt; <strong>AFMS</strong>(session_ID), return <strong>reason_cd</strong> and <strong>review_status</strong>.</p><p><strong>PASS</strong>: pass</p><p><strong>REVIEW</strong>: retrieve db, if review_status= review and func_cd and reason_cd 交集不为空, then pass and email customer.</p><p>如果交集为空，then pass.</p><p><strong>REJECT</strong>: retrieve db, review_status= reject and func_cd and reason_cd  交集不为空, then reject and  email customer and bank side call center.</p><p>如果交集为空，then pass.</p><p>if AFMS response review_status = pass, will return pass, if AFMS response review_status = pass.</p><p>if AFMS response review_status = review, and AFMS response reason_cd contains the reason_cd configured in table anti_malware_dti, will return pass, and send alert notification to customer.</p><p>if AFMS response review_status = reject, and AFMs response reason_cd contains the reason_cd configured in table anti_malware_dti, will return block, and send alert notification to customer and internal call center.</p><p>AFMS Resp review_status = &quot;reject&quot; but the reason_cd did not include the ms db configuration &quot;RC1305&quot;, so ms-fraud-management return pass.</p><p><strong>AFMS reject 的原因有</strong><strong>哪些？</strong></p><p>rc6310 Blacklisted IP</p><p>rc5309 Sanctioned Jurisdiction 受制裁的司法管辖区</p><p>rc1305 Financial Malware 财务恶意软件</p><p>rc4308 Jailbroken/Rooted 越狱/获得根权限</p><p>rc3307 Blacklisted Device 黑名单中的设备</p><p>rc2306 New Device 新设备 （和上次设备不一样）</p><p>rc1000 Sanctioned Countries 受制裁国家</p><p>AFMS对用户的IP，设备信息，loginlD信息，国家地区，APP进行校验。</p><h2 id="ms-fraud-management-数据依赖和同步">数据依赖和同步</h2><p>1. /v1/v2接口 passthrough mode -&gt; SOA -&gt; INB, inb db</p><p>2. /v4 standalone mode with toggle (on in Prod) -&gt; USP inb db.</p><p>3. ms-fraud-mgn batch jobb sync up inb db to ms db fn status every Fri.</p><h3 id="ms-fraud-management-Dependency">Dependency</h3><p>1. Some upstream invoke v1/v2 still.</p><p>2. inb db datastill update still.</p><p><br/></p><h2 id="ms-fraud-management-主要架构设计方案">主要架构设计方案</h2><p><br/></p><h2 id="ms-fraud-management-主要数据库设计">主要数据库设计</h2><h3 id="ms-fraud-management-token">token</h3><p>token信息表，包括token取值，channel，group，用户ID，是否撤销，撤销原因。</p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 178.0px;"/><col style="width: 178.0px;"/><col style="width: 252.0px;"/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Remark</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd">id</td><td class="confluenceTd">id</td><td class="confluenceTd">UUID</td></tr><tr><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div><h2 id="ms-fraud-management-遇到的问题和解决方案">遇到的问题和解决方案</h2><p><br/></p><h2 id="ms-fraud-management-优缺点和改进方案分析，业界对比">优缺点和改进方案分析，业界对比</h2><p><br/></p><p><br/></p><p><br/></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220239/16220240.png">C5B856E0-CEB6-466F-8A76-5BF898AA6C60.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220239/16220241.png">image2023-10-1_22-46-23.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220239/16220242.png">image2023-10-1_22-28-53.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220239/16220243.png">image2023-10-1_22-18-23.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on 六月 14, 2025 21:40</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

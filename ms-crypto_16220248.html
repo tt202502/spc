@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>专业剑 : ms-crypto</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">专业剑</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Base-Services_6389781.html">Base Services</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            专业剑 : ms-crypto
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> admin</span>, last modified on 四月 13, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1749908443879 {padding: 0px;}
+div.rbtoc1749908443879 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1749908443879 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1749908443879'>
+<ul class='toc-indentation'>
+<li><a href='#ms-crypto-服务描述'>服务描述</a></li>
+<li><a href='#ms-crypto-主要API'>主要API</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-crypto-/internal/pin/changePOST'>/internal/pin/change POST</a></li>
+<li><a href='#ms-crypto-/internal/pin/createPOST'>/internal/pin/create POST</a></li>
+<li><a href='#ms-crypto-/internal/pin/policyPOST'>/internal/pin/policy POST</a></li>
+<li><a href='#ms-crypto-/internal/pin/verifyPOST'>/internal/pin/verify POST</a></li>
+<li><a href='#ms-crypto-/crypto/decryptPOST'>/crypto/decrypt POST</a></li>
+<li><a href='#ms-crypto-/crypto/decrypto/encryption-paramGET'>/crypto/decrypto/encryption-param GET</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-crypto-流程'>流程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href='#ms-crypto-主要业务流程'>主要业务流程</a></li>
+<li><a href='#ms-crypto-主要架构设计方案'>主要架构设计方案</a></li>
+<li><a href='#ms-crypto-主要数据库设计'>主要数据库设计</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-crypto-ms_key'>ms_key</a></li>
+</ul>
+</li>
+<li><a href='#ms-crypto-遇到的问题和解决方案'>遇到的问题和解决方案</a></li>
+<li><a href='#ms-crypto-优缺点和改进方案分析，业界对比'>优缺点和改进方案分析，业界对比</a></li>
+</ul>
+</div></p><p><br/></p><h2 id="ms-crypto-服务描述">服务描述</h2><p>提供加解密服务，比如对密码的加解密和验证。</p><h2 id="ms-crypto-主要API">主要API</h2><h3 id="ms-crypto-/internal/pin/changePOST">/internal/pin/change POST</h3><p>用于1FA，修改pin。</p><h3 id="ms-crypto-/internal/pin/createPOST">/internal/pin/create POST</h3><p>用于1FA，创建pin。</p><h3 id="ms-crypto-/internal/pin/policyPOST">/internal/pin/policy POST</h3><p>用于1FA，返回pin配置，比如minLength、maxlength。</p><h3 id="ms-crypto-/internal/pin/verifyPOST">/internal/pin/verify POST</h3><p>用于1FA，验证pin。</p><h3 id="ms-crypto-/crypto/decryptPOST">/crypto/decrypt POST</h3><p>rsa decrypt。</p><p><strong>步骤</strong>：</p><p>1. 如果请求参数keyId存在，通过keyId查询缓存和DB.ms-key表，返回MsKey。</p><p>如果keyId不存在，但是<span>authMethod和<span>authChannel存在，查询缓存和DB。</span></span></p><p><span><span>如果都不存在，keyId={x-source-country}_{x-source-id}_E2EE。</span></span></p><p><span><span>2. 通过MsKey.privateKey解密，并返回。</span></span></p><p><span><span>如果请求参数<span>encryptedKey存在，通过RSA_AES算法解密。否则通过RSA算法解密。</span></span></span></p><p><span><span><br/></span></span></p><div class="table-wrap"><table class="relative-table confluenceTable" style="width: 57.5715%;"><colgroup><col style="width: 16.6262%;"/><col style="width: 83.3829%;"/></colgroup><tbody><tr><th class="confluenceTh">请求参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd">encryptionAlgo</td><td class="confluenceTd">String，加密算法，RSA（默认）和RSA_AES</td></tr><tr><td class="confluenceTd">encryptedData</td><td class="confluenceTd">String，已加密的数据</td></tr><tr><td class="confluenceTd"><span>encryptedKey</span></td><td class="confluenceTd">String，<span>RSA_AES算法时使用，表示用RSA public key加密后的AES key</span></td></tr><tr><td class="confluenceTd">keyId</td><td class="confluenceTd">String，第一优先级，用于RSA加解密。比如SG_INB_E2EE。实际通过request header获取。</td></tr><tr><td class="confluenceTd">authMethod</td><td class="confluenceTd"><span>String，比如E2EE</span></td></tr><tr><td class="confluenceTd">authChannel</td><td class="confluenceTd">String，比如INB</td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table class="relative-table confluenceTable" style="width: 57.3622%;"><colgroup><col style="width: 16.4434%;"/><col style="width: 83.5658%;"/></colgroup><tbody><tr><th class="confluenceTh">响应参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd">decryptedValue</td><td class="confluenceTd">String，已解密数据</td></tr></tbody></table></div><p><br/></p><h3 id="ms-crypto-/crypto/decrypto/encryption-paramGET">/crypto/decrypto/encryption-param GET</h3><p>获取public key、exponent 和modulus。</p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 135.0px;"/><col style="width: 694.0px;"/></colgroup><tbody><tr><th class="confluenceTh">请求参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 141.0px;"/><col style="width: 687.0px;"/></colgroup><tbody><tr><th class="confluenceTh">响应参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><h4 id="ms-crypto-流程">流程</h4><p><br/></p><p><br/></p><h2 id="ms-crypto-主要业务流程">主要业务流程</h2><p><br/></p><h2 id="ms-crypto-主要架构设计方案">主要架构设计方案</h2><p><br/></p><h2 id="ms-crypto-主要数据库设计">主要数据库设计</h2><p>schedma：auth</p><h3 id="ms-crypto-ms_key">ms_key</h3><p>通过在KeyIdKeyCache类loadKeysToCacheByKeyId()方法上增加注解@EventListener(ApplicationReadyEvent.class)，在应用启动时查询数据库并加载数据到缓存。</p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 178.0px;"/><col style="width: 178.0px;"/><col style="width: 252.0px;"/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Remark</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd">id</td><td class="confluenceTd">id</td><td class="confluenceTd">UUID</td></tr><tr><td colspan="1" class="confluenceTd">use_hsm</td><td colspan="1" class="confluenceTd">Boolean</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">key_algo</td><td colspan="1" class="confluenceTd">String</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">key_length</td><td colspan="1" class="confluenceTd">Int</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">private_key</td><td colspan="1" class="confluenceTd">String</td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">public_key</td><td colspan="1" class="confluenceTd">jsonb</td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div><h2 id="ms-crypto-遇到的问题和解决方案">遇到的问题和解决方案</h2><p><br/></p><h2 id="ms-crypto-优缺点和改进方案分析，业界对比">优缺点和改进方案分析，业界对比</h2><p><br/></p><p><br/></p><p><br/></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220248/16220249.png">C5B856E0-CEB6-466F-8A76-5BF898AA6C60.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220248/16220250.png">image2023-10-1_22-46-23.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220248/16220251.png">image2023-10-1_22-28-53.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220248/16220252.png">image2023-10-1_22-18-23.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on 六月 14, 2025 21:40</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

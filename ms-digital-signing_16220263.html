@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>专业剑 : ms-digital-signing</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">专业剑</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Base-Services_6389781.html">Base Services</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            专业剑 : ms-digital-signing
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> admin</span>, last modified on 四月 12, 2025
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1749908445513 {padding: 0px;}
+div.rbtoc1749908445513 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1749908445513 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1749908445513'>
+<ul class='toc-indentation'>
+<li><a href='#ms-digital-signing-服务描述'>服务描述</a></li>
+<li><a href='#ms-digital-signing-主要API'>主要API</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-digital-signing-POST/ndi/transactions/sign'>POST /ndi/transactions/sign</a></li>
+<li><a href='#ms-digital-signing-POST/ndi/transactions/status'>POST /ndi/transactions/status</a></li>
+<li><a href='#ms-digital-signing-POST/internal/ndi/doc/sign'>POST /internal/ndi/doc/sign</a></li>
+<li><a href='#ms-digital-signing-POST/internal/ndi/doc/hash'>POST /internal/ndi/doc/hash</a></li>
+<li><a href='#ms-digital-signing-GET/internal/ndi/doc/sign/{authorizationId}/status'>GET /internal/ndi/doc/sign/{authorizationId}/status</a></li>
+<li><a href='#ms-digital-signing-POST/ndi/doc/callback'>POST /ndi/doc/callback</a></li>
+<li><a href='#ms-digital-signing-POST/internal/ndi/nca/json/ocsp'>POST /internal/ndi/nca/json/ocsp</a></li>
+<li><a href='#ms-digital-signing-POST/internal/ndi/nca/ocsp'>POST /internal/ndi/nca/ocsp</a></li>
+<li><a href='#ms-digital-signing-GETv1/.well-known/jwks.json'>GET v1/.well-known/jwks.json</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-digital-signing-流程'>流程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href='#ms-digital-signing-主要业务流程'>主要业务流程</a></li>
+<li><a href='#ms-digital-signing-主要架构设计方案'>主要架构设计方案</a></li>
+<li><a href='#ms-digital-signing-主要数据库设计'>主要数据库设计</a>
+<ul class='toc-indentation'>
+<li><a href='#ms-digital-signing-transaction_details_v2'>transaction_details_v2</a></li>
+<li><a href='#ms-digital-signing-DOC_SIGNING_DETAILS'>DOC_SIGNING_DETAILS</a></li>
+</ul>
+</li>
+<li><a href='#ms-digital-signing-遇到的问题和解决方案'>遇到的问题和解决方案</a></li>
+<li><a href='#ms-digital-signing-优缺点和改进方案分析，业界对比'>优缺点和改进方案分析，业界对比</a></li>
+</ul>
+</div></p><p><br/></p><h2 id="ms-digital-signing-服务描述">服务描述</h2><p>提供数字签名的服务。</p><p>NDI: Digital Signing Service (DSS) 签名服务提供方。</p><p>Signing Type: Document Signing and Transaction Signing 文档签名和交易签名。</p><p>Action: 主要操作包括Sign和Status。</p><p><span class="confluence-embedded-file-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image" height="400" src="attachments/16220263/16777224.png" data-image-src="attachments/16220263/16777224.png" data-unresolved-comment-count="0" data-linked-resource-id="16777224" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image2025-4-12_21-58-15.png" data-base-url="http://confluence.txw.com:9090" data-linked-resource-content-type="image/png" data-linked-resource-container-id="16220263" data-linked-resource-container-version="9"></span></p><h2 id="ms-digital-signing-主要API">主要API</h2><h3 id="ms-digital-signing-POST/ndi/transactions/sign">POST /ndi/transactions/sign</h3><p>Transactions Sign。</p><p>就是用请求体中的<span>transactionInstructions和<span>transactionId</span></span>生成Transaction Hash和JWS，并返回。</p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 176.0px;"/><col style="width: 680.0px;"/></colgroup><tbody><tr><th class="confluenceTh">请求参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd">transactionInstructions</td><td class="confluenceTd">String，最大长度512</td></tr><tr><td colspan="1" class="confluenceTd">transactionId</td><td colspan="1" class="confluenceTd">String</td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 176.0px;"/><col style="width: 678.0px;"/></colgroup><tbody><tr><th class="confluenceTh">响应参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd">nonce</td><td class="confluenceTd">String，10位随机字符串</td></tr><tr><td class="confluenceTd">state</td><td class="confluenceTd"><span>String，<span>10位</span>随机字符串</span></td></tr><tr><td class="confluenceTd">transactionPayload</td><td class="confluenceTd">String，已签名的JWT，包括tranaction hash（通过transactionId:<span>transactionInstructions的HASH计算得到</span>）</td></tr></tbody></table></div><p><br/></p><h3 id="ms-digital-signing-POST/ndi/transactions/status">POST /ndi/transactions/status</h3><p>Transactions Status. 校验sign code。</p><p><strong>步骤</strong>：</p><p>1）通过state，查询transaction_details_v2表，获得Nonce。</p><p>2）通过配置文件获取subject、audience、issuer、issueTime、expirationTime、claim，生成jws。</p><p>3）<strong>调用singpass/txn-signature，传参jws和sign_code，返回token。</strong></p><p>4）通过token，校验Nonce，是否过期，校验<span>singpass_Id或<span>legal_id。</span></span></p><p><span><span>5）从token解析出expiryTime、signatureTime、txnHash和txnHashSignature并返回。</span></span></p><p><span><span><br/></span></span></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 176.0px;"/><col style="width: 673.0px;"/></colgroup><tbody><tr><th class="confluenceTh">请求参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd">sign_code</td><td class="confluenceTd">String, received from NDI，随机字符串</td></tr><tr><td class="confluenceTd">state</td><td class="confluenceTd"><span>String, received from /ndi/transactions/sign<span>，随机字符串</span></span></td></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table class="relative-table confluenceTable" style="width: 59.037%;"><colgroup><col style="width: 21.3033%;"/><col style="width: 78.7056%;"/></colgroup><tbody><tr><th class="confluenceTh"><span>响应</span>参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd">signatureTime</td><td class="confluenceTd">String, signed time，签名时间</td></tr><tr><td class="confluenceTd">expiryTime</td><td class="confluenceTd">String, expiry time，过期时间</td></tr><tr><td class="confluenceTd">txnHashSignature</td><td class="confluenceTd">String, signed transaction hash，签名的交易hash</td></tr><tr><td class="confluenceTd">txnHash</td><td class="confluenceTd">String, transaction hash，交易hash</td></tr></tbody></table></div><p><br/></p><h3 id="ms-digital-signing-POST/internal/ndi/doc/sign">POST /internal/ndi/doc/sign</h3><p>not in use.</p><h3 id="ms-digital-signing-POST/internal/ndi/doc/hash">POST /internal/ndi/doc/hash</h3><p>not in use.</p><h3 id="ms-digital-signing-GET/internal/ndi/doc/sign/{authorizationId}/status">GET /internal/ndi/doc/sign/{authorizationId}/status</h3><h3 id="ms-digital-signing-POST/ndi/doc/callback">POST /ndi/doc/callback</h3><h3 id="ms-digital-signing-POST/internal/ndi/nca/json/ocsp">POST /internal/ndi/nca/json/ocsp</h3><h3 id="ms-digital-signing-POST/internal/ndi/nca/ocsp">POST /internal/ndi/nca/ocsp</h3><h3 id="ms-digital-signing-GETv1/.well-known/jwks.json">GET v1/.well-known/jwks.json</h3><p>Retrieve JWKs.</p><p><br/></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 135.0px;"/><col style="width: 694.0px;"/></colgroup><tbody><tr><th class="confluenceTh">请求参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 141.0px;"/><col style="width: 687.0px;"/></colgroup><tbody><tr><th class="confluenceTh">响应参数</th><th class="confluenceTh">描述</th></tr><tr><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><h4 id="ms-digital-signing-流程">流程</h4><p><br/></p><p><br/></p><h2 id="ms-digital-signing-主要业务流程">主要业务流程</h2><p><br/></p><h2 id="ms-digital-signing-主要架构设计方案">主要架构设计方案</h2><p><br/></p><h2 id="ms-digital-signing-主要数据库设计">主要数据库设计</h2><h3 id="ms-digital-signing-transaction_details_v2">transaction_details_v2</h3><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 178.0px;"/><col style="width: 231.0px;"/><col style="width: 254.0px;"/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Remark</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd"><span>txn_id</span></td><td class="confluenceTd">txn_id</td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd">nonce</td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd">state</td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd">jws</td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd">singpass_Id</td><td class="confluenceTd">UUID</td><td class="confluenceTd"><br/></td></tr><tr><td class="confluenceTd">legal_id</td><td class="confluenceTd"><br/></td><td class="confluenceTd"><br/></td></tr></tbody></table></div><p><br/></p><h3 id="ms-digital-signing-DOC_SIGNING_DETAILS">DOC_SIGNING_DETAILS</h3><p>文档签名明细表。</p><div class="table-wrap"><table class="fixed-table confluenceTable"><colgroup><col style="width: 178.0px;"/><col style="width: 226.0px;"/><col style="width: 252.0px;"/></colgroup><tbody><tr><th class="confluenceTh">Field</th><th class="confluenceTh">Remark</th><th class="confluenceTh">Value</th></tr><tr><td class="confluenceTd">id</td><td class="confluenceTd">id</td><td class="confluenceTd">UUID</td></tr><tr><td colspan="1" class="confluenceTd">CHNL_CD</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">TRANSACTION_ID</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">USER_ID</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">SIGNPASS_UUID</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">LEGAL_ID</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">DOC_NAME</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">DOC_HASH</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">DOC_HASH_SIGNATURE</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">NOTIFICATION_TOKEN</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">CHALLENGE_CODE</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">NONCE</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">USER_CERT</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">EXPIRE_AT</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">ERROR_DETAILS</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">ERROR_CODE</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">ERROR_DESC</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">SIGNING_TIME</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">STS_CD</td><td colspan="1" class="confluenceTd"><p><strong>USER_ACTION</strong> - pending user to scan (no user certificate available)</p><p><strong>USER_APPROVAL</strong> - pending user to enter 6 digit challenge code and approve (user certificate available but no signature)</p><p><strong>APPROVED</strong> - approved and signed (signature <span>available</span>)</p><p><strong>FAILED</strong> - refer to error field for details</p></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">VER_NBR</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">CRT_BY</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">CRT_TIME</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">UPT_BY</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr><tr><td colspan="1" class="confluenceTd">UPT_TIME</td><td colspan="1" class="confluenceTd"><br/></td><td colspan="1" class="confluenceTd"><br/></td></tr></tbody></table></div><p><span>PRIMARY_KEY (ID, </span><span>CRT_TIME</span><span>)</span></p><p><span>RANGE PARTITION (</span><span>CRT_TIME</span><span>)</span></p><h2 id="ms-digital-signing-遇到的问题和解决方案">遇到的问题和解决方案</h2><p><br/></p><h2 id="ms-digital-signing-优缺点和改进方案分析，业界对比">优缺点和改进方案分析，业界对比</h2><p><br/></p><p><br/></p><p><br/></p>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220263/16220264.png">C5B856E0-CEB6-466F-8A76-5BF898AA6C60.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220263/16220265.png">image2023-10-1_22-46-23.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220263/16220266.png">image2023-10-1_22-28-53.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220263/16220267.png">image2023-10-1_22-18-23.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220263/16777217.png">image2025-4-7_22-3-5.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/16220263/16777224.png">image2025-4-12_21-58-15.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on 六月 14, 2025 21:40</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
